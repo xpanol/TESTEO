@@ -3,128 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <title>TESTEO - MARKETING DIGITAL | DIGITAL MARKETING</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
 <style>
-body { 
-  font-family: 'Special Elite', cursive; 
-  padding: 20px; 
-  background-color: #f8ac10; 
-  background-image: url('XPANOL_SEAMLESS.png'); 
-  background-repeat: repeat; 
-  background-size: auto; 
-  background-blend-mode: lighten; 
-  color: #000; 
-  display: flex; 
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Special Elite', cursive;
+  background-color: #f8ac10;
+  color: #000;
+  display: flex;
   justify-content: center;
+  padding: 40px 20px;
+  position: relative;
 }
 
-#quiz-wrapper { width: 80%; max-width: 900px; }
-
-h1 { text-align:center; font-size:80px; color:#fff; margin-bottom:5px; }
-h2 { text-align:center; font-size:1.8em; color:#000; margin-bottom:20px; }
-
-.word-box-es {
-  background-color: #f8ac10; 
-  padding: 15px 20px;
-  border-radius: 8px;
-  display: inline-block;
-  margin: 10px 0;
-  font-size: 1.5em;
-  text-align: center;
-  font-weight: bold;
+/* WZÓR */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("XPANOL_SEAMLESS.png");
+  background-repeat: repeat;
+  background-size: auto;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.word-box-en {
-  background-color: #d9171a; 
-  padding: 15px 20px;
-  border-radius: 8px;
-  display: inline-block;
-  margin: 10px 0;
-  font-size: 1.5em;
+#quiz-wrapper {
+  width: 100%;
+  max-width: 960px;
+  position: relative;
+  z-index: 1;
+}
+
+/* BLOK TYTUŁU */
+.header-box {
+  background: #f8ac10;
+  padding: 25px 30px;
+  border-radius: 14px;
   text-align: center;
-  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 80px;
   color: #fff;
+  margin: 0;
 }
 
-.question { 
-  margin-bottom:20px; 
-  padding:15px 20px; 
-  background:#fff; 
-  border-radius:8px; 
-  box-shadow:0 2px 5px rgba(0,0,0,0.2); 
-  font-size:1.3em;
+h2 {
+  font-size: 1.8em;
+  margin: 5px 0 0;
 }
 
-.options label { 
-  display:block; 
-  margin:8px 0; 
-  cursor:pointer; 
-  font-size:1.1em; 
-  color:#000;
+/* PYTANIA */
+.question {
+  background: #fff;
+  padding: 18px 22px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-size: 1.25em;
 }
 
-input[type="radio"] { 
-  accent-color: #f8ac10; 
+.options label {
+  display: block;
+  margin: 8px 0;
+  cursor: pointer;
 }
 
-.feedback { 
-  margin-top:8px; 
-  font-weight:bold; 
-  font-size:1.1em; 
+input[type="radio"] {
+  accent-color: #f8ac10;
+}
+
+.feedback {
+  margin-top: 8px;
+  font-weight: bold;
 }
 
 .correct { color: green; }
 .wrong { color: red; }
 
-#resultado { margin-top:25px; font-weight:bold; font-size:1.5em; text-align:center; }
-#pagination { text-align:center; margin-top:20px; }
-
-button { 
-  background:#fff; 
-  border:2px solid #000; 
-  border-radius:5px; 
-  padding:8px 15px; 
-  font-size:1em; 
-  cursor:pointer; 
-  margin: 0 5px;
+#pagination {
+  text-align: center;
+  margin-top: 25px;
 }
 
-.modal { 
-  display:none; 
-  position:fixed; 
-  z-index:9999; 
-  left:0; top:0; 
-  width:100%; height:100%; 
-  background-color:rgba(0,0,0,0.7); 
-  justify-content:center; 
-  align-items:center;
+button {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 1em;
+  cursor: pointer;
+  margin: 0 6px;
 }
 
-.modal-content { 
-  background:#fff; 
-  padding:40px 60px; 
-  border-radius:10px; 
-  text-align:center; 
-  max-width:600px; 
-  animation:bounceIn 1s forwards;
+#resultado {
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 20px;
 }
 
-.modal h1 { font-size:3em; margin-bottom:20px; }
+/* MODALE */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 50px 60px;
+  border-radius: 14px;
+  text-align: center;
+  animation: pop 0.8s forwards;
+}
+
 #modal-success h1 { color: #f8ac10; }
-.modal p { font-size:1.5em; }
 
-@keyframes bounceIn { 0%{transform:scale(0.5);opacity:0;} 60%{transform:scale(1.2);opacity:1;} 100%{transform:scale(1);opacity:1;} }
-
+@keyframes pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
 </style>
 </head>
+
 <body>
 
 <div id="quiz-wrapper">
-  <h1>TESTEO</h1>
-  <h2>MARKETING DIGITAL | DIGITAL MARKETING</h2>
+
+  <div class="header-box">
+    <h1>TESTEO</h1>
+    <h2>MARKETING DIGITAL | DIGITAL MARKETING</h2>
+  </div>
+
   <div id="quiz-container"></div>
   <div id="pagination"></div>
   <div id="resultado"></div>
+
 </div>
 
 <div id="modal-success" class="modal">
@@ -137,136 +163,124 @@ button {
 <div id="modal-try" class="modal">
   <div class="modal-content">
     <h1>¡INTÉNTALO DE NUEVO!</h1>
-    <p>No lograste todas las respuestas correctas :)</p>
+    <p>Prueba otra vez</p>
   </div>
 </div>
 
 <script>
-// Quiz data (przykład z 5 pytań, resztę możesz dopisać analogicznie)
 const quizData = [
-{question:'“Meeting” en español es:', options:['reunión','empezar la reunión','objetivos principales'], answer:'reunión'},
-{question:'“Start the meeting” se traduce como:', options:['resumen de la reunión','empezar la reunión','reunión'], answer:'empezar la reunión'},
-{question:'“Main objectives” en español:', options:['resumen de la reunión','objetivos principales','acuerdos'], answer:'objetivos principales'},
-{question:'“This quarter” significa:', options:['siguiente paso','este trimestre','periodo'], answer:'este trimestre'},
-{question:'“KPI” en español:', options:['indicador clave de rendimiento','retorno de inversión','panel de control'], answer:'indicador clave de rendimiento'}
+{q:"Meeting", a:"reunión", o:["reunión","inicio formal de un proyecto anual","encuentro improvisado sin agenda"]},
+{q:"Start the meeting", a:"empezar la reunión", o:["empezar la reunión","cerrar los puntos pendientes de la sesión","hacer un resumen ejecutivo previo"]},
+{q:"Main objectives", a:"objetivos principales", o:["objetivos principales","tareas operativas asignadas por el equipo","líneas secundarias sin prioridad"]},
+{q:"This quarter", a:"este trimestre", o:["este trimestre","periodo fiscal completo","fase inicial del proyecto"]},
+{q:"KPI", a:"indicador clave de rendimiento", o:["indicador clave de rendimiento","resultado final sin contexto","dato aislado sin análisis"]},
+
+{q:"Return on investment", a:"retorno de inversión", o:["retorno de inversión","coste estimado sin beneficios","resultado creativo sin medición"]},
+{q:"Digital campaign", a:"campaña digital", o:["campaña digital","publicación aislada sin estrategia","acción offline puntual"]},
+{q:"Present results", a:"presentar resultados", o:["presentar resultados","discutir hipótesis futuras","evaluar ideas no ejecutadas"]},
+{q:"Chart", a:"gráfico", o:["gráfico","panel estratégico completo","documento explicativo"]},
+{q:"Increase in engagement", a:"aumento del engagement", o:["aumento del engagement","crecimiento sin interacción real","subida temporal de visitas irrelevantes"]},
+
+{q:"Content strategy", a:"estrategia de contenidos", o:["estrategia de contenidos","colección aleatoria de publicaciones","plan gráfico sin objetivos"]},
+{q:"Updates", a:"novedades", o:["novedades","acuerdos cerrados","instrucciones obligatorias"]},
+{q:"Design team", a:"equipo de diseño", o:["equipo de diseño","departamento financiero","grupo de validación legal"]},
+{q:"Meeting summary", a:"resumen de la reunión", o:["resumen de la reunión","lista de tareas futuras","opiniones individuales"]},
+{q:"Agreements", a:"acuerdos", o:["acuerdos","sugerencias abiertas","comentarios informales"]},
+
+{q:"Set priorities", a:"establecer prioridades", o:["establecer prioridades","repartir tareas al azar","decidir sin criterios"]},
+{q:"Tasks by urgency and impact", a:"tareas según impacto y urgencia", o:["tareas según impacto y urgencia","acciones sin planificación","trabajos secundarios"]},
+{q:"Project status", a:"estado del proyecto", o:["estado del proyecto","archivo histórico","plan de lanzamiento"]},
+{q:"Dashboard", a:"panel de control", o:["panel de control","lista de reuniones","resumen textual largo"]},
+{q:"Coordinate with the team", a:"coordinar con el equipo", o:["coordinar con el equipo","tomar decisiones unilaterales","delegar sin comunicación"]},
+
+{q:"Next step", a:"siguiente paso", o:["siguiente paso","fase final cerrada","tarea opcional"]},
+{q:"Process", a:"proceso", o:["proceso","resultado inmediato","acción aislada"]},
+{q:"Optimize", a:"optimizar", o:["optimizar","cambiar sin análisis","repetir errores"]},
+{q:"Project progress", a:"avance del proyecto", o:["avance del proyecto","resultado definitivo","resumen financiero"]},
+{q:"Changes / modifications", a:"cambios / modificaciones", o:["cambios / modificaciones","decisiones estratégicas finales","objetivos principales"]},
+
+{q:"Analyze the competition", a:"analizar la competencia", o:["analizar la competencia","copiar estrategias","ignorar el mercado"]},
+{q:"A/B testing", a:"prueba de dos versiones para comparar resultados", o:["prueba de dos versiones para comparar resultados","análisis creativo sin datos","plan general de campaña"]},
+{q:"Ad performance", a:"rendimiento de los anuncios", o:["rendimiento de los anuncios","creatividad visual","presupuesto total"]},
+{q:"Creative approach", a:"enfoque creativo", o:["enfoque creativo","ejecución técnica","fase administrativa"]}
 ];
 
-const questionsPerPage = 5;
-let currentPage = 0;
-const answersState = Array(quizData.length).fill(null);
+const perPage = 5;
+let page = 0;
+const state = Array(quizData.length).fill(null);
 
-function shuffleArray(arr){
-  let array = arr.slice();
-  for(let i=array.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [array[i],array[j]]=[array[j],array[i]];
-  }
-  return array;
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5);
 }
 
-function renderPage(){
-  const container = document.getElementById('quiz-container');
-  container.innerHTML='';
-  const start = currentPage * questionsPerPage;
-  const end = start + questionsPerPage;
-  const pageData = quizData.slice(start,end);
+function render() {
+  const box = document.getElementById("quiz-container");
+  box.innerHTML = "";
+  const start = page * perPage;
+  quizData.slice(start, start + perPage).forEach((item, i) => {
+    const idx = start + i;
+    const div = document.createElement("div");
+    div.className = "question";
+    div.innerHTML = `
+      <p>${idx + 1}. "${item.q}"</p>
+      ${shuffle(item.o).map(o =>
+        `<label><input type="radio" name="q${idx}" value="${o}" ${state[idx]===o?"checked":""}> ${o}</label>`
+      ).join("")}
+      <div class="feedback" id="f${idx}"></div>
+    `;
+    box.appendChild(div);
 
-  pageData.forEach((item,index)=>{
-    const globalIndex = start + index;
-    const shuffledOptions = shuffleArray(item.options);
-    const div = document.createElement('div');
-    div.className='question';
-    div.innerHTML=`<p>${globalIndex+1}. ${item.question}</p>
-      <div class="options">
-      ${shuffledOptions.map(opt=>`<label><input type="radio" name="q${globalIndex}" value="${opt}" ${answersState[globalIndex]===opt?'checked':''}> ${opt}</label>`).join('')}
-      </div>
-      <div class="feedback" id="fb-q${globalIndex}"></div>`;
-    container.appendChild(div);
-
-    const inputs = div.querySelectorAll('input[type="radio"]');
-    inputs.forEach(input=>{
-      input.addEventListener('change',()=>{
-        answersState[globalIndex] = input.value;
-        const feedback = document.getElementById('fb-q'+globalIndex);
-        if(input.value===quizData[globalIndex].answer){
-          feedback.textContent='✅ Correcto!';
-          feedback.className='feedback correct';
+    div.querySelectorAll("input").forEach(r => {
+      r.onchange = () => {
+        state[idx] = r.value;
+        const f = document.getElementById("f"+idx);
+        if (r.value === item.a) {
+          f.textContent = "Correcto";
+          f.className = "feedback correct";
         } else {
-          feedback.textContent='❌ Incorrecto!';
-          feedback.className='feedback wrong';
+          f.textContent = "Incorrecto";
+          f.className = "feedback wrong";
         }
-      });
+      };
     });
   });
-
-  renderPagination();
+  nav();
 }
 
-function renderPagination(){
-  const pagination = document.getElementById('pagination');
-  pagination.innerHTML='';
-
-  if(currentPage > 0){
-    const prevBtn=document.createElement('button');
-    prevBtn.textContent='Anterior';
-    prevBtn.addEventListener('click',()=>{
-      currentPage--;
-      renderPage();
-    });
-    pagination.appendChild(prevBtn);
+function nav() {
+  const p = document.getElementById("pagination");
+  p.innerHTML = "";
+  if (page > 0) {
+    const b = document.createElement("button");
+    b.textContent = "Anterior";
+    b.onclick = () => { page--; render(); };
+    p.appendChild(b);
   }
-
-  if((currentPage+1)*questionsPerPage < quizData.length){
-    const nextBtn=document.createElement('button');
-    nextBtn.textContent='Siguiente';
-    nextBtn.addEventListener('click',()=>{
-      currentPage++;
-      renderPage();
-    });
-    pagination.appendChild(nextBtn);
+  if ((page + 1) * perPage < quizData.length) {
+    const b = document.createElement("button");
+    b.textContent = "Siguiente";
+    b.onclick = () => { page++; render(); };
+    p.appendChild(b);
   } else {
-    const finishBtn=document.createElement('button');
-    finishBtn.textContent='Finalizar';
-    finishBtn.addEventListener('click', checkFinalScore);
-    pagination.appendChild(finishBtn);
+    const b = document.createElement("button");
+    b.textContent = "Finalizar";
+    b.onclick = finish;
+    p.appendChild(b);
   }
 }
 
-function checkFinalScore(){
-  if(answersState.includes(null)){
-    alert('Debes responder todas las preguntas antes de finalizar.');
-    return;
-  }
-  let score = answersState.filter((ans,i)=>ans===quizData[i].answer).length;
-  document.getElementById('resultado').textContent=`Puntuación: ${score} / ${quizData.length}`;
-
-  const modalSuccess=document.getElementById('modal-success');
-  const modalTry=document.getElementById('modal-try');
-
-  if(score===quizData.length){
-    modalSuccess.style.display='flex';
-  } else {
-    modalTry.style.display='flex';
-  }
+function finish() {
+  if (state.includes(null)) return alert("Responde todo");
+  const ok = state.filter((v,i)=>v===quizData[i].a).length;
+  document.getElementById("resultado").textContent = `Resultado: ${ok} / ${quizData.length}`;
+  document.getElementById(ok===quizData.length ? "modal-success" : "modal-try").style.display = "flex";
 }
 
-document.getElementById('modal-success').addEventListener('click',()=>{
-  document.getElementById('modal-success').style.display='none';
-});
-document.getElementById('modal-try').addEventListener('click',()=>{
-  document.getElementById('modal-try').style.display='none';
-  resetQuiz();
-});
+document.getElementById("modal-success").onclick = () => location.reload();
+document.getElementById("modal-try").onclick = () => location.reload();
 
-function resetQuiz(){
-  for(let i=0;i<answersState.length;i++) answersState[i]=null;
-  document.getElementById('resultado').textContent='';
-  currentPage=0;
-  renderPage();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-renderPage();
+render();
 </script>
+
 </body>
 </html>
