@@ -5,42 +5,52 @@
 <title>TESTEO - MARKETING DIGITAL | DIGITAL MARKETING</title>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 <style>
+:root {
+  --bg-opacity: 0.3; /* regulacja przezroczystości PNG w tle */
+}
+
 body { 
     font-family: 'Special Elite', cursive; 
-    padding: 20px; 
-    background: #f8ac10 url('XPANOL_SEAMLESS.png') repeat; 
-    color: #000; 
+    margin: 0; 
+    padding: 0;
+    background-color: #f8ac10;
+    background-image: url('XPANOL_SEAMLESS.png');
+    background-repeat: repeat;
+    background-size: auto;
+    background-blend-mode: lighten;
+    color: #000;
     display: flex; 
     justify-content: center;
-    background-size: auto;
 }
 
 #quiz-wrapper { width: 80%; max-width: 900px; }
 
-h1 { 
-    text-align:center; 
-    font-size:80px; 
-    color:#fff; 
-    margin-bottom:5px; 
-    background-color: #f8ac10; 
-    padding: 20px 0;
-    border-radius: 10px;
+.header-wrapper {
+    width: 100%;
+    background-color: #f8ac10;
+    padding: 60px 0; /* wysokość prostokąta pod nagłówkiem */
+    text-align: center;
 }
 
-h2 { 
-    text-align:center; 
-    font-size:1.8em; 
-    color:#000; 
-    margin-bottom:20px; 
+.header-wrapper h1 {
+    font-size: 80px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.header-wrapper h2 {
+    font-size: 1.8em;
+    color: #000;
+    margin-bottom: 0;
 }
 
 .question { 
     margin-bottom:20px; 
     padding:15px 20px; 
-    background:#fff; /* przywrócone białe tło */ 
+    background:#fff; 
     border-radius:8px; 
     box-shadow:0 2px 5px rgba(0,0,0,0.2); 
-    font-size:1.3em; 
+    font-size:1.3em;
 }
 
 .options label { 
@@ -48,81 +58,36 @@ h2 {
     margin:8px 0; 
     cursor:pointer; 
     font-size:1.1em; 
-    color:#000; 
+    color:#000;
 }
 
-input[type="radio"] { 
-    accent-color: #f8ac10; /* Twój żółty kolor */ 
-}
+input[type="radio"] { accent-color: #f8ac10; }
 
-.feedback { 
-    margin-top:8px; 
-    font-weight:bold; 
-    font-size:1.1em; 
-}
-
+.feedback { margin-top:8px; font-weight:bold; font-size:1.1em; }
 .correct { color: green; }
 .wrong { color: red; }
 
-#resultado { 
-    margin-top:25px; 
-    font-weight:bold; 
-    font-size:1.5em; 
-    text-align:center; 
-}
+#resultado { margin-top:25px; font-weight:bold; font-size:1.5em; text-align:center; }
+#pagination { text-align:center; margin-top:20px; }
 
-#pagination { 
-    text-align:center; 
-    margin-top:20px; 
-}
+button { background:#fff; border:2px solid #000; border-radius:5px; padding:8px 15px; font-size:1em; cursor:pointer; margin: 0 5px;}
 
-button { 
-    background:#fff; 
-    border:2px solid #000; 
-    border-radius:5px; 
-    padding:8px 15px; 
-    font-size:1em; 
-    cursor:pointer; 
-    margin: 0 5px; 
-}
-
-.modal { 
-    display:none; 
-    position:fixed; 
-    z-index:9999; 
-    left:0; top:0; 
-    width:100%; 
-    height:100%; 
-    background-color:rgba(0,0,0,0.7); 
-    justify-content:center; 
-    align-items:center; 
-}
-
-.modal-content { 
-    background:#fff; 
-    padding:40px 60px; 
-    border-radius:10px; 
-    text-align:center; 
-    max-width:600px; 
-    animation:bounceIn 1s forwards; 
-}
-
+.modal { display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.7); justify-content:center; align-items:center;}
+.modal-content { background:#fff; padding:40px 60px; border-radius:10px; text-align:center; max-width:600px; animation:bounceIn 1s forwards;}
 .modal h1 { font-size:3em; margin-bottom:20px; }
 #modal-success h1 { color: #f8ac10; }
 .modal p { font-size:1.5em; }
 
-@keyframes bounceIn { 
-    0%{transform:scale(0.5);opacity:0;} 
-    60%{transform:scale(1.2);opacity:1;} 
-    100%{transform:scale(1);opacity:1;} 
-}
+@keyframes bounceIn { 0%{transform:scale(0.5);opacity:0;} 60%{transform:scale(1.2);opacity:1;} 100%{transform:scale(1);opacity:1;} }
 </style>
 </head>
 <body>
 
 <div id="quiz-wrapper">
-  <h1>TESTEO</h1>
-  <h2>MARKETING DIGITAL | DIGITAL MARKETING</h2>
+  <div class="header-wrapper">
+      <h1>TESTEO</h1>
+      <h2>MARKETING DIGITAL | DIGITAL MARKETING</h2>
+  </div>
   <div id="quiz-container"></div>
   <div id="pagination"></div>
   <div id="resultado"></div>
@@ -143,37 +108,38 @@ button {
 </div>
 
 <script>
+// Quiz data: 30 pytań lingwistycznych
 const quizData = [
 {question:'“Meeting” en español es:', options:['reunión','empezar la reunión','objetivos principales'], answer:'reunión'},
-{question:'“Start the meeting” se traduce como:', options:['empezar la reunión','resumen de la reunión','panel de control'], answer:'empezar la reunión'},
-{question:'“Main objectives” en español:', options:['objetivos principales','acuerdos','avance del proyecto'], answer:'objetivos principales'},
-{question:'“This quarter” significa:', options:['este trimestre','siguiente paso','periodo'], answer:'este trimestre'},
-{question:'“KPI” en español:', options:['indicador clave de rendimiento','retorno de inversión','gráfico'], answer:'indicador clave de rendimiento'},
-{question:'“Return on Investment” se traduce como:', options:['retorno de inversión','presupuesto','contenido alineado con los objetivos de marca'], answer:'retorno de inversión'},
-{question:'“Digital campaign” en español:', options:['campaña digital','estrategia de contenidos','panel de control'], answer:'campaña digital'},
-{question:'“Present results” significa:', options:['presentar resultados','resumen de la reunión','optimizar'], answer:'presentar resultados'},
-{question:'“Chart” se traduce como:', options:['gráfico','dashboard','avance del proyecto'], answer:'gráfico'},
-{question:'“Increase in engagement” en español:', options:['aumento del engagement','alcanzar más seguidores sin contexto','medir solo likes'], answer:'aumento del engagement'},
-{question:'“Content strategy” se traduce como:', options:['estrategia de contenidos','propuesta de contenidos sin relación con marca','equipo de diseño'], answer:'estrategia de contenidos'},
-{question:'“Updates” significa:', options:['novedades','resumen de la reunión','acuerdos'], answer:'novedades'},
-{question:'“Design team” en español:', options:['equipo de diseño','coordinador general','responsables de recursos humanos'], answer:'equipo de diseño'},
-{question:'“Meeting summary” se traduce como:', options:['resumen de la reunión','objetivos principales','siguiente paso'], answer:'resumen de la reunión'},
-{question:'“Agreements” en español:', options:['acuerdos','resumen de la reunión','decidir'], answer:'acuerdos'},
-{question:'“Set priorities” significa:', options:['establecer prioridades','hacer cambios irrelevantes','coordinar con el equipo'], answer:'establecer prioridades'},
-{question:'“Tasks according to impact and urgency” se traduce como:', options:['tareas según impacto y urgencia','realizar tareas sin análisis','optimizar recursos sin plan'], answer:'tareas según impacto y urgencia'},
-{question:'“Project status” en español:', options:['estado del proyecto','avance del proyecto','panel de control'], answer:'estado del proyecto'},
-{question:'“Dashboard” significa:', options:['panel de control','lista de reuniones','resumen visual de métricas irrelevantes'], answer:'panel de control'},
-{question:'“Coordinate with the team” se traduce como:', options:['coordinar con el equipo','tomar decisiones sin consenso','establecer prioridades individualmente'], answer:'coordinar con el equipo'},
+{question:'“Start the meeting” se traduce como:', options:['resumen de la reunión','empezar la reunión','reunión'], answer:'empezar la reunión'},
+{question:'“Main objectives” en español:', options:['resumen de la reunión','objetivos principales','acuerdos'], answer:'objetivos principales'},
+{question:'“This quarter” significa:', options:['siguiente paso','este trimestre','periodo'], answer:'este trimestre'},
+{question:'“KPI” en español:', options:['indicador clave de rendimiento','retorno de inversión','panel de control'], answer:'indicador clave de rendimiento'},
+{question:'“Return on Investment” se traduce como:', options:['retorno de inversión','propuesta de campaña basada en tendencias externas','presupuesto aprobado por el equipo'], answer:'retorno de inversión'},
+{question:'“Digital campaign” en español:', options:['campaña digital','estrategia de contenidos','gráfico'], answer:'campaña digital'},
+{question:'“Present results” significa:', options:['presentar resultados','coordinar con el equipo antes de finalizar','revisar juntos todos los documentos'], answer:'presentar resultados'},
+{question:'“Chart” se traduce como:', options:['gráfico','panel de control','avance del proyecto'], answer:'gráfico'},
+{question:'“Increase in engagement” en español:', options:['aumento del engagement','medir únicamente likes y shares sin contexto','alcanzar mayor número de seguidores irrelevantes'], answer:'aumento del engagement'},
+{question:'“Content strategy” se traduce como:', options:['estrategia de contenidos','equipo de diseño','propuesta de contenidos sin relación con marca'], answer:'estrategia de contenidos'},
+{question:'“Updates” significa:', options:['novedades','acuerdos','resumen de la reunión'], answer:'novedades'},
+{question:'“Design team” en español:', options:['equipo de diseño','coordinador general del presupuesto','responsables de recursos humanos'], answer:'equipo de diseño'},
+{question:'“Meeting summary” se traduce como:', options:['resumen de la reunión','objetivos principales','acuerdos'], answer:'resumen de la reunión'},
+{question:'“Agreements” en español:', options:['acuerdos','resumen de la reunión','siguiente paso'], answer:'acuerdos'},
+{question:'“Set priorities” significa:', options:['establecer prioridades','optimizar recursos sin plan','coordinar con el equipo'], answer:'establecer prioridades'},
+{question:'“Tasks according to impact and urgency” se traduce como:', options:['tareas según impacto y urgencia','realizar tareas sin análisis previo','hacer cambios irrelevantes'], answer:'tareas según impacto y urgencia'},
+{question:'“Project status” en español:', options:['avance detallado de las tareas completadas hasta el momento','estado del proyecto','lista de indicadores secundarios'], answer:'estado del proyecto'},
+{question:'“Dashboard” significa:', options:['panel de control','resumen visual de métricas irrelevantes','lista de reuniones pasadas'], answer:'panel de control'},
+{question:'“Coordinate with the team” se traduce como:', options:['coordinar con el equipo','tomar decisiones sobre tareas sin consenso','establecer prioridades individualmente'], answer:'coordinar con el equipo'},
 {question:'“Next step” en español:', options:['siguiente paso','optimizar','decidir más tarde'], answer:'siguiente paso'},
-{question:'“Process” significa:', options:['proceso','cambios menores','avance del proyecto'], answer:'proceso'},
-{question:'“Optimize” se traduce como:', options:['optimizar','ajustar elementos irrelevantes','coordinar'], answer:'optimizar'},
-{question:'“Project progress” en español:', options:['avance del proyecto','resumen de reuniones','seguimiento detallado de tareas completadas'], answer:'avance del proyecto'},
-{question:'“Changes / Modifications” se traduce como:', options:['cambios / modificaciones','implementar ajustes sin importancia','tomar decisiones estratégicas sobre el presupuesto'], answer:'cambios / modificaciones'},
-{question:'“Analyze the competition” significa:', options:['analizar la competencia','preparar informe no relacionado','resumen de objetivos internos'], answer:'analizar la competencia'},
-{question:'“A/B testing” en español:', options:['prueba de dos versiones de un elemento para comparar resultados','analizar competencia','propuesta creativa'], answer:'prueba de dos versiones de un elemento para comparar resultados'},
-{question:'“Ad performance” se traduce como:', options:['rendimiento de los anuncios','estrategia de marketing sin relación','contenido alineado con objetivos externos'], answer:'rendimiento de los anuncios'},
-{question:'“Content aligned with brand objectives” significa:', options:['contenido alineado con los objetivos de marca','diseño sin relación con marca','material promocional basado en tendencias externas'], answer:'contenido alineado con los objetivos de marca'},
-{question:'“Creative approach” en español:', options:['enfoque creativo','desarrollar materiales sin marca','atraer a la audiencia'], answer:'enfoque creativo'}
+{question:'“Process” significa:', options:['proceso','avance del proyecto','cambios menores sin impacto'], answer:'proceso'},
+{question:'“Optimize” se traduce como:', options:['optimizar','ajustar elementos sin importancia','decidir sin base'], answer:'optimizar'},
+{question:'“Project progress” en español:', options:['seguimiento detallado de las tareas completadas hasta el momento','avance del proyecto','resumen de reuniones anteriores'], answer:'avance del proyecto'},
+{question:'“Changes / Modifications” se traduce como:', options:['cambios / modificaciones','tomar decisiones estratégicas sobre el presupuesto','implementar ajustes menores sin afectar el objetivo general'], answer:'cambios / modificaciones'},
+{question:'“Analyze the competition” significa:', options:['analizar la competencia','preparar un informe de actividades no relacionadas','realizar un resumen de objetivos internos'], answer:'analizar la competencia'},
+{question:'“A/B testing” en español:', options:['prueba de dos versiones de un elemento para comparar resultados','análisis de la competencia en redes sociales','propuesta de campaña creativa'], answer:'prueba de dos versiones de un elemento para comparar resultados'},
+{question:'“Ad performance” se traduce como:', options:['rendimiento de los anuncios','contenido alineado con objetivos externos','estrategia de marketing sin relación con objetivos'], answer:'rendimiento de los anuncios'},
+{question:'“Content aligned with brand objectives” significa:', options:['contenido alineado con los objetivos de marca','diseño de materiales promocionales basados en tendencias externas','creación de contenido sin relación directa con la identidad de la marca'], answer:'contenido alineado con los objetivos de marca'},
+{question:'“Creative approach” en español:', options:['enfoque creativo','atraer a la audiencia','desarrollar materiales sin alineación con la marca'], answer:'enfoque creativo'}
 ];
 
 const questionsPerPage = 5;
