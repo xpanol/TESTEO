@@ -75,7 +75,14 @@ button { background:#fff; border:2px solid #000; border-radius:5px; padding:8px 
 .modal { display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.7); justify-content:center; align-items:center;}
 .modal-content { background:#fff; padding:40px 60px; border-radius:10px; text-align:center; max-width:600px; animation:bounceIn 1s forwards;}
 .modal h1 { font-size:3em; margin-bottom:20px; }
-#modal-success h1 { color: #f8ac10; }
+#modal-success h1 { 
+    color: #ffffff; /* biały dla ENHORABUENA */
+}
+
+#modal-try h1 { 
+    color: #d9171a; /* Twój czerwony dla INTÉNTALO DE NUEVO */
+}
+
 .modal p { font-size:1.5em; }
 
 @keyframes bounceIn { 0%{transform:scale(0.5);opacity:0;} 60%{transform:scale(1.2);opacity:1;} 100%{transform:scale(1);opacity:1;} }
