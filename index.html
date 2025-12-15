@@ -5,84 +5,64 @@
 <title>TESTEO - MARKETING DIGITAL | DIGITAL MARKETING</title>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg-opacity: 0.1; /* regulacja przezroczystości PNG w tle */
-}
-
-body { 
-    font-family: 'Special Elite', cursive; 
-    margin: 0; 
+body {
+    font-family: 'Special Elite', cursive;
+    margin: 0;
     padding: 0;
-    background-color: #f8ac10;
-    background-image: url('XPANOL_SEAMLESS.png');
-    background-repeat: repeat;
-    background-size: auto;
-    background-blend-mode: lighten;
-    color: #000;
-    display: flex; 
-    justify-content: center;
+    background: #f8ac10; /* żółte tło */
+    position: relative;
 }
 
-#quiz-wrapper { width: 80%; max-width: 900px; }
-
-.header-wrapper {
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    background-color: #f8ac10;
-    padding: 60px 0; /* wysokość prostokąta pod nagłówkiem */
+    height: 100%;
+    background: url('XPANOL_SEAMLESS.png') repeat;
+    background-size: auto; /* lub np. 200px 200px */
+    opacity: 0.2; /* ustawiasz tu przezroczystość PNG */
+    pointer-events: none;
+    z-index: 0;
+}
+
+#header-bg {
+    background: #f8ac10;
+    width: 100%;
+    padding: 60px 20px;
+    box-sizing: border-box;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
-.header-wrapper h1 {
-    font-size: 80px;
-    color: #fff;
-    margin-bottom: 5px;
+#quiz-wrapper {
+    width: 80%;
+    max-width: 900px;
+    margin: 20px auto;
+    position: relative;
+    z-index: 1;
 }
 
-.header-wrapper h2 {
-    font-size: 1.8em;
-    color: #000;
-    margin-bottom: 0;
-}
+h1 { font-size:80px; color:#fff; margin:0 0 10px 0; }
+h2 { font-size:1.8em; color:#000; margin:0; }
 
-.question { 
-    margin-bottom:20px; 
-    padding:15px 20px; 
-    background:#fff; 
-    border-radius:8px; 
-    box-shadow:0 2px 5px rgba(0,0,0,0.2); 
-    font-size:1.3em;
-}
-
-.options label { 
-    display:block; 
-    margin:8px 0; 
-    cursor:pointer; 
-    font-size:1.1em; 
-    color:#000;
-}
-
+.question { margin-bottom:20px; padding:15px 20px; background:#fff; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.2); font-size:1.3em;}
+.options label { display:block; margin:8px 0; cursor:pointer; font-size:1.1em; color:#000;}
 input[type="radio"] { accent-color: #f8ac10; }
-
 .feedback { margin-top:8px; font-weight:bold; font-size:1.1em; }
 .correct { color: green; }
 .wrong { color: red; }
-
 #resultado { margin-top:25px; font-weight:bold; font-size:1.5em; text-align:center; }
 #pagination { text-align:center; margin-top:20px; }
-
 button { background:#fff; border:2px solid #000; border-radius:5px; padding:8px 15px; font-size:1em; cursor:pointer; margin: 0 5px;}
 
 .modal { display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.7); justify-content:center; align-items:center;}
 .modal-content { background:#fff; padding:40px 60px; border-radius:10px; text-align:center; max-width:600px; animation:bounceIn 1s forwards;}
 .modal h1 { font-size:3em; margin-bottom:20px; }
-#modal-success h1 { 
-    color: #ffffff; /* biały dla ENHORABUENA */
-}
-
-#modal-try h1 { 
-    color: #d9171a; /* Twój czerwony dla INTÉNTALO DE NUEVO */
-}
-
+#modal-success h1 { color: #fff; }
+#modal-try h1 { color: #d9171a; }
 .modal p { font-size:1.5em; }
 
 @keyframes bounceIn { 0%{transform:scale(0.5);opacity:0;} 60%{transform:scale(1.2);opacity:1;} 100%{transform:scale(1);opacity:1;} }
@@ -90,11 +70,12 @@ button { background:#fff; border:2px solid #000; border-radius:5px; padding:8px 
 </head>
 <body>
 
+<div id="header-bg">
+    <h1>TESTEO</h1>
+    <h2>MARKETING DIGITAL | DIGITAL MARKETING</h2>
+</div>
+
 <div id="quiz-wrapper">
-  <div class="header-wrapper">
-      <h1>TESTEO</h1>
-      <h2>MARKETING DIGITAL | DIGITAL MARKETING</h2>
-  </div>
   <div id="quiz-container"></div>
   <div id="pagination"></div>
   <div id="resultado"></div>
